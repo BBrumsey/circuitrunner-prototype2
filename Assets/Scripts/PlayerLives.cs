@@ -1,67 +1,69 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine;
 
 public class PlayerLives : MonoBehaviour
 {
     public TMP_Text livesText;
     public int lives = 3;
-    private Vector3 respawnPoint;
-    private Rigidbody2D rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private WaypointMovement movement;
+    private bool gameEnded;
+
     void Start()
     {
-     respawnPoint = transform.position;
-        rb = GetComponent<Rigidbody2D>();
+        movement = GetComponent<WaypointMovement>();
         UpdateLivesText();
-    }
-
-    public void LoseLife()
-    {
-        lives--;
-        Debug.Log("Lives remaining " + lives);
-        UpdateLivesText();
-        if (lives <= 0)
-        {
-            FindFirstObjectByType<Game_Manager>().GameOver();
-        }
-        else
-        {
-            Respawn();
-        }
-    }
-
-    void Respawn()
-    {
-        rb.linearVelocity = Vector2.zero;
-        transform.position = respawnPoint;
-
-        EnemyChase enemy = FindFirstObjectByType<EnemyChase>();
-        if (enemy != null)
-        {
-            enemy.ResetEnemy();
-        }
-    }
-
-
-    // Update is called once per frame
-    void UpdateLivesText() 
-    {
-        livesText.text = "Lives: " + lives;
-    }
-
-    public void SetCheckpoint(Vector3 newCheckpoint)
-    {
-        respawnPoint = newCheckpoint;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Obstacle"))
+        if (!gameEnded && collision.CompareTag("Obstacle"))
         {
-            Debug.Log("Player hit the obstacle!");
             LoseLife();
+        }
+    }
+
+    public void LoseLife()
+    {
+        if (gameEnded)
+        {
+            return;
+        }
+
+        lives = Mathf.Max(0, lives - 1);
+        UpdateLivesText();
+
+        if (lives == 0)
+        {
+            gameEnded = true;
+
+            Game_Manager gameManager =
+                FindFirstObjectByType<Game_Manager>();
+
+            if (gameManager != null)
+            {
+                gameManager.GameOver();
+            }
+
+            return;
+        }
+
+        if (movement != null)
+        {
+            movement.ResetToStart();
+        }
+    }
+
+    public void StopLives()
+    {
+        gameEnded = true;
+    }
+
+    void UpdateLivesText()
+    {
+        if (livesText != null)
+        {
+            livesText.text = "Lives: " + lives;
         }
     }
 }

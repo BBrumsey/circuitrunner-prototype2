@@ -10,10 +10,7 @@ public class WaypointMovement : MonoBehaviour
 
     void Start()
     {
-        if (waypoints.Length > 0)
-        {
-            transform.position = waypoints[0].position;
-        }
+        ResetToStart();
     }
 
     void Update()
@@ -23,12 +20,9 @@ public class WaypointMovement : MonoBehaviour
             return;
         }
 
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
         Vector2 input = new Vector2(
-            horizontalInput,
-            verticalInput
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
         );
 
         if (input.sqrMagnitude == 0)
@@ -38,30 +32,40 @@ public class WaypointMovement : MonoBehaviour
 
         input.Normalize();
 
-        bool betweenWaypoints = Vector2.Distance(
-            transform.position,
-            waypoints[currentWaypoint].position
-        ) > 0.05f;
-
-        // Reverse toward the last waypoint.
-        if (betweenWaypoints &&
-            DirectionMatches(currentWaypoint, input))
+        // The player is currently sitting on a waypoint.
+        if (currentWaypoint == targetWaypoint)
         {
-            targetWaypoint = currentWaypoint;
+            if (DirectionMatches(currentWaypoint + 1, input))
+            {
+                targetWaypoint = currentWaypoint + 1;
+            }
+            else if (DirectionMatches(currentWaypoint - 1, input))
+            {
+                targetWaypoint = currentWaypoint - 1;
+            }
+            else
+            {
+                return;
+            }
         }
-        // Move to the next waypoint.
-        else if (DirectionMatches(currentWaypoint + 1, input))
-        {
-            targetWaypoint = currentWaypoint + 1;
-        }
-        // Move to the previous waypoint.
-        else if (DirectionMatches(currentWaypoint - 1, input))
-        {
-            targetWaypoint = currentWaypoint - 1;
-        }
+        // The player is currently between two waypoints.
         else
         {
-            return;
+            if (DirectionMatches(targetWaypoint, input))
+            {
+                // Continue toward the target.
+            }
+            else if (DirectionMatches(currentWaypoint, input))
+            {
+                // Reverse along the same circuit segment.
+                int oldCurrent = currentWaypoint;
+                currentWaypoint = targetWaypoint;
+                targetWaypoint = oldCurrent;
+            }
+            else
+            {
+                return;
+            }
         }
 
         transform.position = Vector2.MoveTowards(
@@ -79,13 +83,6 @@ public class WaypointMovement : MonoBehaviour
         }
     }
 
-    public void ResetToStart()
-    {
-        currentWaypoint = 0;
-        targetWaypoint = 0;
-        transform.position = waypoints[0].position;
-    }
-
     bool DirectionMatches(int waypointIndex, Vector2 input)
     {
         if (waypointIndex < 0 ||
@@ -99,5 +96,16 @@ public class WaypointMovement : MonoBehaviour
             (Vector2)transform.position).normalized;
 
         return Vector2.Dot(input, directionToWaypoint) > 0.7f;
+    }
+
+    public void ResetToStart()
+    {
+        currentWaypoint = 0;
+        targetWaypoint = 0;
+
+        if (waypoints.Length > 0)
+        {
+            transform.position = waypoints[0].position;
+        }
     }
 }

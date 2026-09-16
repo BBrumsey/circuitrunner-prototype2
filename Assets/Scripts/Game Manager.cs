@@ -48,15 +48,22 @@ public class Game_Manager : MonoBehaviour
             movement.enabled = false;
         }
 
-        GameObject obstacle =
-            GameObject.FindGameObjectWithTag("Obstacle");
+        PlayerLives playerLives =
+            FindFirstObjectByType<PlayerLives>();
 
-        if (obstacle != null)
+        if (playerLives != null)
+        {
+            playerLives.StopLives();
+        }
+
+        GameObject[] obstacles =
+            GameObject.FindGameObjectsWithTag("Obstacle");
+
+        foreach (GameObject obstacle in obstacles)
         {
             obstacle.SetActive(false);
         }
     }
-
     public void Restart()
     {
         SceneManager.LoadScene(
