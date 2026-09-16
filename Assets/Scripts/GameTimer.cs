@@ -7,13 +7,14 @@ public class GameTimer : MonoBehaviour
     private float elaspedTime;
     private bool timerRunning = true;
 
-   
-   
+
+
 
     // Update is called once per frame
     void Update()
     {
-        if (timerRunning){
+        if (timerRunning)
+        {
             elaspedTime += Time.deltaTime;
 
             int minutes = Mathf.FloorToInt(elaspedTime / 60);

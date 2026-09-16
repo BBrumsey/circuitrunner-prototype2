@@ -6,6 +6,7 @@ public class Game_Manager : MonoBehaviour
     public GameObject levelCompleteUI;
     public GameObject gameOverUI;
 
+
     private bool gameHasEnded = false;
 
     public void CompleteLevel()
