@@ -44,6 +44,7 @@ public class PlayerLives : MonoBehaviour
         }
     }
 
+
     // Update is called once per frame
     void UpdateLivesText() 
     {
@@ -53,5 +54,14 @@ public class PlayerLives : MonoBehaviour
     public void SetCheckpoint(Vector3 newCheckpoint)
     {
         respawnPoint = newCheckpoint;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Obstacle"))
+        {
+            Debug.Log("Player hit the obstacle!");
+            LoseLife();
+        }
     }
 }

@@ -79,6 +79,13 @@ public class WaypointMovement : MonoBehaviour
         }
     }
 
+    public void ResetToStart()
+    {
+        currentWaypoint = 0;
+        targetWaypoint = 0;
+        transform.position = waypoints[0].position;
+    }
+
     bool DirectionMatches(int waypointIndex, Vector2 input)
     {
         if (waypointIndex < 0 ||

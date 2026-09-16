@@ -2,25 +2,16 @@ using UnityEngine;
 
 public class GoalComplete : MonoBehaviour
 {
-    public GameObject circuitCompleteScreen;
-
-    void Start()
-    {
-        circuitCompleteScreen.SetActive(false);
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            circuitCompleteScreen.SetActive(true);
+            Game_Manager gameManager =
+                FindFirstObjectByType<Game_Manager>();
 
-            WaypointMovement movement =
-                other.GetComponent<WaypointMovement>();
-
-            if (movement != null)
+            if (gameManager != null)
             {
-                movement.enabled = false;
+                gameManager.CompleteLevel();
             }
         }
     }

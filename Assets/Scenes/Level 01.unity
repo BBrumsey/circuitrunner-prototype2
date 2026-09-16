@@ -982,7 +982,7 @@ Transform:
   m_GameObject: {fileID: 206654323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.45, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1394,7 +1394,6 @@ GameObject:
   m_Component:
   - component: {fileID: 349991158}
   - component: {fileID: 349991159}
-  - component: {fileID: 349991160}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1431,19 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game_Manager
   levelCompleteUI: {fileID: 788201620}
   gameOverUI: {fileID: 1962459095}
---- !u!114 &349991160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349991157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40cb6915e7092e840ba1d6ffb719ffc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameTimer
-  timerText: {fileID: 1017098931}
+  gameTimer: {fileID: 1017098933}
 --- !u!1 &424192879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,6 +2319,7 @@ GameObject:
   - component: {fileID: 788201621}
   - component: {fileID: 788201623}
   - component: {fileID: 788201622}
+  - component: {fileID: 788201624}
   m_Layer: 5
   m_Name: Circuit Complete
   m_TagString: Untagged
@@ -2372,7 +2360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09105727, g: 0.09137366, b: 0.7660377, a: 0.392}
+  m_Color: {r: 0.09105727, g: 0.09137366, b: 0.7660377, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2397,6 +2385,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788201620}
   m_CullTransparentMesh: 1
+--- !u!95 &788201624
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788201620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16e0920624dc9d44c8a62fba23a42fcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &808323631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2839,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280185568
+    rgba: 1995488
   m_fontColor: {r: 0.8792453, g: 0.4455178, b: 0.1177857, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3093,6 +3103,7 @@ GameObject:
   - component: {fileID: 1017098930}
   - component: {fileID: 1017098932}
   - component: {fileID: 1017098931}
+  - component: {fileID: 1017098933}
   m_Layer: 5
   m_Name: ' Timer Text'
   m_TagString: Untagged
@@ -3219,6 +3230,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017098929}
   m_CullTransparentMesh: 1
+--- !u!114 &1017098933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017098929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40cb6915e7092e840ba1d6ffb719ffc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameTimer
+  timerText: {fileID: 1017098931}
 --- !u!1 &1029428060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,7 +3268,7 @@ Transform:
   m_GameObject: {fileID: 1029428060}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.82, y: -7.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3508,7 +3532,7 @@ GameObject:
   - component: {fileID: 1164274438}
   m_Layer: 0
   m_Name: Electric Hazard
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4620,7 +4644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55b947ff724bcf4b9a0821930ffb2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoalComplete
-  circuitCompleteScreen: {fileID: 788201620}
 --- !u!1 &1446547278
 GameObject:
   m_ObjectHideFlags: 0
@@ -6369,6 +6392,7 @@ GameObject:
   - component: {fileID: 1962459096}
   - component: {fileID: 1962459098}
   - component: {fileID: 1962459097}
+  - component: {fileID: 1962459099}
   m_Layer: 5
   m_Name: Circuit Destroyed
   m_TagString: Untagged
@@ -6409,7 +6433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82641506, g: 0.109676234, b: 0.054574464, a: 0.392}
+  m_Color: {r: 0.82641506, g: 0.109676234, b: 0.054574464, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6434,6 +6458,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962459095}
   m_CullTransparentMesh: 1
+--- !u!95 &1962459099
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962459095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b06a1ed1bbcb8742b902b85512cbf8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1984537134
 GameObject:
   m_ObjectHideFlags: 0
