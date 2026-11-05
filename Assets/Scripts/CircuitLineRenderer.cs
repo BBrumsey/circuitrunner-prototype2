@@ -1,4 +1,8 @@
+using System;
 using UnityEngine;
+
+[ExecuteAlways]
+[RequireComponent(typeof(LineRenderer))]
 
 public class CircuitLineRenderer : MonoBehaviour
 {
